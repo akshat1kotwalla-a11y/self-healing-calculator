@@ -1,4 +1,10 @@
 # ... (Keep automatically generated top-level parameters)
+name: Continuous AI Self-Healing Build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
   run-application-tests:
     runs-on: ubuntu-latest
