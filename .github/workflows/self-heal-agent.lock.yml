@@ -15,7 +15,6 @@ permissions:
 
 jobs:
   run-application-tests:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +33,8 @@ jobs:
           python test_calculator.py > test_crash_report.txt 2>&1
 
       - name: Trigger Copilot Engine to Heal Build
-        if: steps.tests.outcome == 'failure' && github.event_name!='workflow_dispatch'
+        # Circuit Breaker: Only run if the tests fail AND this isn't already a background agent run
+        if: steps.tests.outcome == 'failure' && github.event_name != 'workflow_dispatch'
         run: |
           echo "Installing GitHub Agentic Workflows extension..."
           gh extension install github/gh-aw
