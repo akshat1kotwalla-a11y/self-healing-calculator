@@ -1,19 +1,18 @@
-# ... (Keep automatically generated top-level parameters)
 name: Continuous AI Self-Healing Build
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
-    
-permissions: 
+
+permissions:
   contents: write
   pull-requests: write
   issues: write
   actions: write
-  
+
 jobs:
   run-application-tests:
     runs-on: ubuntu-latest
@@ -36,10 +35,10 @@ jobs:
       - name: Trigger Copilot Engine to Heal Build
         if: steps.tests.outcome == 'failure'
         run: |
-          echo "Installing Gh aw extension"
+          echo "Installing GitHub Agentic Workflows extension..."
           gh extension install github/gh-aw
-
+          
           echo "Executing agent reasoning loop on failure log..."
           gh aw run .github/workflows/self-heal-agent.md
         env:
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
