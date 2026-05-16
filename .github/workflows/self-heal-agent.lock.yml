@@ -19,11 +19,13 @@ jobs:
           python-version: '3.10'
 
       - name: Execute Test Suite
+        id: tests
+        continue-on-error: true
         run: |
           python test_calculator.py > test_crash_report.txt 2>&1
 
       - name: Trigger Copilot Engine to Heal Build
-        if: failure()
+        if: steps.tests.outcome == 'failure'
         uses: github/gh-aw-actions/setup@main
         with:
           agent: '.github/workflows/self-heal-agent.md'
