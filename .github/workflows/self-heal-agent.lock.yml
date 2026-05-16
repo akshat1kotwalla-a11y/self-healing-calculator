@@ -24,7 +24,7 @@ jobs:
 
       - name: Trigger Copilot Engine to Heal Build
         if: failure()
-        uses: actions/copilot-agent@v1
+        uses: github/gh-aw@v1.0.0
         with:
           agent: '.github/workflows/self-heal-agent.md'
           engine: 'github-copilot'
