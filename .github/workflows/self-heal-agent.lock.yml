@@ -1,10 +1,13 @@
 # ... (Keep automatically generated top-level parameters)
 name: Continuous AI Self-Healing Build
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    
 permissions: 
   contents: write
   pull-requests: write
