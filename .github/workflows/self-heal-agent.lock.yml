@@ -28,12 +28,5 @@ jobs:
         if: steps.tests.outcome == 'failure'
         uses: github/gh-aw-actions/setup@main
         with:
-          agent: '.github/workflows/self-heal-agent.md'
-          engine: 'github-copilot'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          context: |
-            PYTHON TEST FAILURE LOG:
-            $(cat test_crash_report.txt)
-
-            RECENT SYSTEM COMMITS:
-            $(git log -n 5 --oneline)
+          destination: '.github/workflows/self-heal-agend.md'
+          job-name: 'run-application-tests'
