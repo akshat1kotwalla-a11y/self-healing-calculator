@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+permissions: 
+  contents: write
+  pull-requests: write
+  issues: write
 jobs:
   run-application-tests:
     runs-on: ubuntu-latest
