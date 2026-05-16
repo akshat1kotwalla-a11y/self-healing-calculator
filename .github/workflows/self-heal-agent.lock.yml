@@ -32,5 +32,5 @@ jobs:
         if: steps.tests.outcome == 'failure'
         uses: github/gh-aw-actions/setup@main
         with:
-          destination: '.github/workflows/self-heal-agend.md'
+          destination: '.github/workflows/self-heal-agent.md'
           job-name: 'run-application-tests'
