@@ -30,7 +30,11 @@ jobs:
 
       - name: Trigger Copilot Engine to Heal Build
         if: steps.tests.outcome == 'failure'
-        uses: github/gh-aw-actions/setup@main
-        with:
-          destination: '.github/copilot-agent-workspace'
-          job-name: 'run-application-tests'
+        run: |
+          echo "Installing Gh aw extension"
+          gh extension install github/gh-aw
+
+          echo "Executing agent reasoning loop on failure log..."
+          gh aw run .github/workflows/self-heal-agent.md
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
